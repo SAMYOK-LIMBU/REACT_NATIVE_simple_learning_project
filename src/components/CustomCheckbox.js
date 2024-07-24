@@ -2,21 +2,27 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {CheckBox} from 'react-native-elements';
 import themes from '../styles/themes';
+import {scale} from 'react-native-size-matters';
 
-const CustomCheckbox = ({title = 'Check Box'}) => {
-  const [isChecked, setChecked] = useState(false);
-
+const CustomCheckbox = ({
+  title = 'Check Box',
+  fontSize = themes.fontSize.insideText,
+  boxSize = scale(25),
+  isChecked = false,
+  setChecked,
+}) => {
   return (
     <View>
       <CheckBox
         title={title}
         checked={isChecked}
+        setChecked={setChecked}
         onPress={() => setChecked(!isChecked)}
-        textStyle={styles.fontStyles}
-        containerStyle={styles.checkBoxStyle}
+        textStyle={[styles.fontStyles, {fontSize: fontSize}]}
+        containerStyle={[styles.checkBoxStyle]}
         checkedColor={themes.colors.primary}
         uncheckedColor={themes.colors.grey}
-        size={25}
+        size={boxSize}
       />
     </View>
   );
@@ -32,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: themes.colors.transparent,
   },
   fontStyles: {
-    fontSize: themes.fontSize.insideText,
     color: themes.colors.black,
+    marginRight: 0,
   },
 });

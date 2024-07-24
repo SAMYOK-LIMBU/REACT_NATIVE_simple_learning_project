@@ -1,12 +1,5 @@
-import {
-  StyleSheet,
-  Text,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {color} from 'react-native-elements/dist/helpers';
 import themes from '../styles/themes';
 
 const LinkText = ({
@@ -14,11 +7,14 @@ const LinkText = ({
   fontColor = themes.colors.primary,
   fontWeight,
   fontSize,
+  onPress,
+  textDecorationLine = '',
 }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <Text
         style={{
+          textDecorationLine: textDecorationLine,
           color: fontColor,
           fontSize: fontSize,
           fontWeight: fontWeight || 'normal',

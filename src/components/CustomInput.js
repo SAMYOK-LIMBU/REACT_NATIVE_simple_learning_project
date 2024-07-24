@@ -3,25 +3,27 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  Touchable,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
 import {ScaledSheet} from 'react-native-size-matters';
 import themes from '../styles/themes';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const {height, width} = Dimensions.get('screen');
-const iconSize = width * 0.07;
+const iconSize = width * 0.06;
+
 const CustomInput = ({
   value,
   setState,
   placeholder,
-  secureTextEntry,
+  secureTextEntry = false,
   iconName,
 }) => {
-  const [IsPasswordVissible, SetPasswordVissible] = useState(secureTextEntry);
+  // Initialize visibility state based on secureTextEntry
+  const [IsPasswordVissible, SetPasswordVissible] = useState(!secureTextEntry);
+
   const OnVisibilityChange = () => {
     SetPasswordVissible(!IsPasswordVissible);
   };
@@ -33,7 +35,7 @@ const CustomInput = ({
           ? styles.forPasswordContainer
           : styles.container
       }>
-      <MaterialIcons
+      <Icon
         name={iconName}
         size={iconSize}
         color={themes.colors.primary}
@@ -44,12 +46,12 @@ const CustomInput = ({
         placeholder={placeholder}
         value={value}
         onChangeText={setState}
-        secureTextEntry={IsPasswordVissible}
+        secureTextEntry={secureTextEntry && !IsPasswordVissible}
       />
-      {placeholder === 'Password' && (
+      {(placeholder === 'Password' || placeholder === 'Confirm Password') && (
         <TouchableOpacity onPress={OnVisibilityChange}>
-          <MaterialIcons
-            name={IsPasswordVissible ? 'visibility' : 'visibility-off'}
+          <Icon
+            name={IsPasswordVissible ? 'eye' : 'eye-slash'}
             style={styles.iconStyle}
             size={iconSize}
           />
@@ -58,6 +60,7 @@ const CustomInput = ({
     </View>
   );
 };
+
 export default CustomInput;
 
 const styles = ScaledSheet.create({
@@ -89,7 +92,7 @@ const styles = ScaledSheet.create({
   },
   iconStyle: {
     color: themes.colors.primary,
-    marginRight: '5@msr',
-    marginLeft: '5@msr',
+    marginRight: '10@msr',
+    marginLeft: '10@msr',
   },
 });

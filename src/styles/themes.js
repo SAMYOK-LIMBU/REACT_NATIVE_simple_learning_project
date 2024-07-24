@@ -6,6 +6,8 @@ const colors = {
   transparent: 'transparent',
   grey: 'grey',
   black: 'black',
+  blue: 'blue',
+  red: 'red',
 };
 const fontSize = {
   heading: scale(24),

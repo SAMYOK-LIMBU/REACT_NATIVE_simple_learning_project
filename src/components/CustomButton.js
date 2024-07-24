@@ -1,11 +1,18 @@
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {ScaledSheet} from 'react-native-size-matters';
 import themes from '../styles/themes';
 const {width} = Dimensions.get('screen');
-const CustomButton = ({text, fontSize, backgroundColor, color}) => {
+const CustomButton = ({text, fontSize, backgroundColor, color, onPress}) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={onPress}
       style={[
         styles.container,
         {backgroundColor: backgroundColor || themes.colors.primary},
@@ -13,7 +20,7 @@ const CustomButton = ({text, fontSize, backgroundColor, color}) => {
       <Text style={[{fontSize: fontSize, color: color || themes.colors.white}]}>
         {text}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 export default CustomButton;

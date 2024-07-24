@@ -1,36 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, useColorScheme, StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import AuthNavigator from './src/navigations/AuthNavigations'; // Ensure this path is correct
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import LoginScreen from './src/screens/auth/LoginScreen';
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? '#333' : '#FFFF',
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <LoginScreen />
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={[styles.safeAreaView, backgroundStyle]}>
+        <AuthNavigator />
+      </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1, // Ensure SafeAreaView takes up the full screen
+  },
+});
 
 export default App;
